@@ -1,0 +1,30 @@
+{
+  "changeType": "addXML",
+  "reference": "customer.zlhdisplaycorrespondence",
+  "namespace": "apps/customer.zlhdisplaycorrespondence/changes/",
+  "projectId": "customer.zlhdisplaycorrespondence",
+  "packageName": "$TMP",
+  "moduleName": "customer/zlhdisplaycorrespondence/changes/fragments/notification.fragment.xml",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "command": "addXML",
+    "sapui5Version": "1.120.0"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1757608093124_330_addXML",
+  "content": {
+    "targetAggregation": "customAnchorBarButton",
+    "index": 0,
+    "fragmentPath": "fragments/notification.fragment.xml"
+  },
+  "texts": {},
+  "selector": {
+    "id": "cus.o2c.correspnc.display.s1::sap.suite.ui.generic.template.ObjectPage.view.Details::C_CACorrespondenceHistory--PDFSection::Section",
+    "idIsLocal": false
+  },
+  "dependentSelector": {},
+  "jsOnly": false,
+  "creation": "2025-09-11T16:28:34.367Z"
+}

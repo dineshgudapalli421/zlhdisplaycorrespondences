@@ -1,0 +1,22 @@
+{
+  "changeType": "codeExt",
+  "reference": "customer.zlhdisplaycorrespondence",
+  "namespace": "apps/customer.zlhdisplaycorrespondence/changes/",
+  "projectId": "customer.zlhdisplaycorrespondence",
+  "moduleName": "customer/zlhdisplaycorrespondence/changes/coding/htmlNotification",
+  "support": {
+    "generator": "rta.service.ControllerExtension"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1757668451495_251_codeExt",
+  "content": {
+    "codeRef": "coding/htmlNotification.js"
+  },
+  "texts": {},
+  "selector": {
+    "controllerName": "sap.suite.ui.generic.template.ObjectPage.view.Details"
+  },
+  "creation": "2025-09-12T09:14:11.496Z"
+}

@@ -1,0 +1,29 @@
+{
+  "fileName": "id_1757668700390_addNewModel",
+  "namespace": "apps/cus.o2c.correspnc.display.s1/appVariants/customer.zlhdisplaycorrespondence/changes",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "creation": "2025-09-12T09:18:20.390Z",
+  "packageName": "$TMP",
+  "reference": "customer.zlhdisplaycorrespondence",
+  "support": {
+    "generator": "@sap-ux/adp-tooling"
+  },
+  "changeType": "appdescr_ui5_addNewModel",
+  "content": {
+    "dataSource": {
+      "customer.NotificationSet": {
+        "uri": "/sap/opu/odata/SAP/ZBI_LEARN_ODATA_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "model": {
+      "customer.oData": {
+        "dataSource": "customer.NotificationSet"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<!-- Use stable and unique IDs!-->
+<core:FragmentDefinition
+    xmlns:uxap="sap.uxap"
+    xmlns:core='sap.ui.core'
+    xmlns='sap.m'
+>
+     <VBox id="vBox-27454f57">
+         <Button
+        id="MyCustomButtonID1"
+        icon="sap-icon://accept"  
+        text="Notification"
+        >
+    </Button>
+    </VBox>
+</core:FragmentDefinition>

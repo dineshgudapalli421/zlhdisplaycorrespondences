@@ -1,0 +1,13 @@
+<!-- Use stable and unique IDs!-->
+<core:FragmentDefinition xmlns:core='sap.ui.core' xmlns='sap.m'>
+    <!-- controlType: sap.uxap.ObjectPageSection -->
+    <!-- targetAggregation: customAnchorBarButton --> 
+    <!--  add your xml here -->
+    <!-- press=".extension.yourProjectName.yourControllerFileName.handleMyCustomPress" -->
+    <Button
+        id="MyCustomButtonID"
+        icon="sap-icon://accept"  
+        text="Notification"
+        >
+    </Button>
+</core:FragmentDefinition>
