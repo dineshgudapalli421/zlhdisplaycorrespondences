@@ -34,17 +34,16 @@ sap.ui.define(
                 const extractionStartIndex = startIndex + searchWord.length;
                 const result = queryString.substring(extractionStartIndex, extractionStartIndex + 32);
                 // result;//
-                let oKey = '02CD022BAA0F1EDFB8DCF9D4B2415BF3';
+                let oKey = result; // '02CD022BAA0F1EDFB8DCF9D4B2415BF3';
                 var aFilter = [];
                 aFilter.push(new Filter("CorrespondenceKey", FilterOperator.EQ, oKey));
                 var oModel = this.getView().getModel("customer.oData");
-                oModel.read("/NotificationsSet", {
-                    filters: aFilter,
+                oModel.read("/FetchNotificationsSet('" + oKey + "')", {
                     success: function (response) {
                         debugger;
-                        if (response.results.length > 0) {
-                            var oContent = response.results[0].Content;
-                             var oHtml = new sap.ui.core.HTML({
+                        if (response.Status === 'T') {
+                            var oContent = response.Content;//response.results[0].Content;
+                            var oHtml = new sap.ui.core.HTML({
                                 content: oContent,
                                 sanitizeContent: true
                             });
@@ -53,20 +52,20 @@ sap.ui.define(
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
-                            oPanel1.addContent(new sap.m.Label({ text: response.results[0].Recepients }));
+                            oPanel1.addContent(new sap.m.Label({ text: response.Recepients }));
                             var oPanel2 = new sap.m.Panel({
                                 headerText: "Date and Time Delivered (EST)",
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
-                            oPanel2.addContent(new sap.m.Label({ text: response.results[0].DeliveryTimestamp }));
+                            oPanel2.addContent(new sap.m.Label({ text: response.DeliveryTimestamp }));
                             var oPanel3 = new sap.m.Panel({
                                 headerText: "Content of Message",
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
                             oPanel3.addContent(oHtml);
-                            
+
                             var oPanel = new sap.m.Panel({
                                 headerText: "",
                                 expandable: false,
@@ -77,7 +76,7 @@ sap.ui.define(
                             oPanel.addContent(oPanel3);
 
                             var oDialog = new Dialog({
-                                title: response.results[0].Subject,
+                                title: response.Subject,
                                 contentWidth: "800px",
                                 contentHeight: "400px",
                                 resizable: true,
@@ -106,7 +105,7 @@ sap.ui.define(
 
 
                         }
-                        else if (response.results.length === 0) {
+                        else if (response.Status === 'F') {
                             MessageBox.error("There are no Notifications for this record");
                         }
 

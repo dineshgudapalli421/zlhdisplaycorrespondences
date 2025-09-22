@@ -13,7 +13,7 @@
   "content": {
     "dataSource": {
       "customer.NotificationSet": {
-        "uri": "/sap/opu/odata/SAP/ZBI_LEARN_ODATA_SRV/",
+        "uri": "/sap/opu/odata/SAP/ZCE_SS_ISU_UMC_SRV/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0"
