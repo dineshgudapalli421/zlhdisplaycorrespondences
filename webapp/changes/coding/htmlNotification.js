@@ -106,7 +106,7 @@ sap.ui.define(
 
                         }
                         else if (response.Status === 'F') {
-                            MessageBox.error("There are no Notifications for this record");
+                            MessageBox.error("There are no notifications for this record.");
                         }
 
                     },
