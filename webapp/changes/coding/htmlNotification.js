@@ -33,16 +33,21 @@ sap.ui.define(
                 let startIndex = queryString.indexOf(searchWord);
                 const extractionStartIndex = startIndex + searchWord.length;
                 const result = queryString.substring(extractionStartIndex, extractionStartIndex + 32);
-                // result;//
-                let oKey = result; // '02CD022BAA0F1EDFB8DCF9D4B2415BF3';
+                const oBp = "BusinessPartner='";
+                let startIndex1 = queryString.indexOf(oBp);
+                const extractionStartIndex1 = startIndex1 + oBp.length;
+                const result1 = queryString.substring(extractionStartIndex1, extractionStartIndex1 + 10);
+                // result;//" + result1 + " 3201000611
+                let oKey = result;//'02ABCADF13331FD0A5A86F76DE397BBD';
                 var aFilter = [];
-                aFilter.push(new Filter("CorrespondenceKey", FilterOperator.EQ, oKey));
+                aFilter.push(new Filter("CoKey", FilterOperator.EQ, oKey));
                 var oModel = this.getView().getModel("customer.oData");
-                oModel.read("/FetchNotificationsSet('" + oKey + "')", {
+                oModel.read("/Accounts(AccountID='" + result1 + "')/Correspondences", {
+                    filters: aFilter,
                     success: function (response) {
                         debugger;
-                        if (response.Status === 'T') {
-                            var oContent = response.Content;//response.results[0].Content;
+                        if (response.results.length > 0) {
+                            var oContent = response.results[0].NotificationDetails.Content;//response.results[0].Content;
                             var oHtml = new sap.ui.core.HTML({
                                 content: oContent,
                                 sanitizeContent: true
@@ -52,13 +57,13 @@ sap.ui.define(
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
-                            oPanel1.addContent(new sap.m.Label({ text: response.Recepients }));
+                            oPanel1.addContent(new sap.m.Label({ text: response.results[0].NotificationDetails.Recepients }));
                             var oPanel2 = new sap.m.Panel({
                                 headerText: "Date and Time Delivered (EST)",
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
-                            oPanel2.addContent(new sap.m.Label({ text: response.DeliveryTimestamp }));
+                            oPanel2.addContent(new sap.m.Label({ text: response.results[0].NotificationDetails.DeliveryTimestamp }));
                             var oPanel3 = new sap.m.Panel({
                                 headerText: "Content of Message",
                                 expandable: false,
@@ -76,7 +81,7 @@ sap.ui.define(
                             oPanel.addContent(oPanel3);
 
                             var oDialog = new Dialog({
-                                title: response.Subject,
+                                title: response.results[0].NotificationDetails.Subject,
                                 contentWidth: "800px",
                                 contentHeight: "400px",
                                 resizable: true,
@@ -105,7 +110,7 @@ sap.ui.define(
 
 
                         }
-                        else if (response.Status === 'F') {
+                        else if (response.results.length === 0) {
                             MessageBox.error("There are no notifications for this record.");
                         }
 
