@@ -128,7 +128,7 @@ sap.ui.define(
 
                         }
                         else if (response.results.length === 0) {
-                            MessageBox.error("No notification available to display.");
+                            MessageBox.information("No notification available to display.");
                         }
 
                     },
