@@ -11,12 +11,13 @@ sap.ui.define(
         'sap/m/Link',
         'sap/ui/core/URI',
         'sap/ui/core/UIComponent',
-        'sap/m/MessageBox'
+        'sap/m/MessageBox',
+        'sap/ui/core/format/DateFormat'
         // ,'sap/ui/core/mvc/OverrideExecution'
     ],
     function (
         ControllerExtension,
-        MessageToast, Dialog, Text, Button, ButtonType, Filter, FilterOperator, Link, URI, UIComponent, MessageBox
+        MessageToast, Dialog, Text, Button, ButtonType, Filter, FilterOperator, Link, URI, UIComponent, MessageBox, DateFormat
         // ,OverrideExecution
     ) {
         'use strict';
@@ -47,6 +48,22 @@ sap.ui.define(
                     success: function (response) {
                         debugger;
                         if (response.results.length > 0) {
+                            var oDate = new Date(response.results[0].NotificationDetails.DeliveryTimestamp);
+                            var estTime = oDate.toLocaleString("en-US", {
+                                timeZone: "America/New_York"
+                            });
+                            var finalDate = new Date(estTime);
+                            var oDateFormat = DateFormat.getDateTimeInstance({
+                                // pattern: "MMMM dd, yyyy HH:mm:ss"
+                                pattern: "MMMM dd, yyyy hh:mm:ss a",
+                                oFormatOptions: {
+                                    UTC: true, // Important: Set to false to consider local time before applying timezone
+                                    strictParsing: true // Optional: Enforce strict parsing
+                                }
+                            });
+
+                            // Format the date
+                            var sFormattedDate = oDateFormat.format(finalDate);
                             var oContent = response.results[0].NotificationDetails.Content;//response.results[0].Content;
                             var oHtml = new sap.ui.core.HTML({
                                 content: oContent,
@@ -63,7 +80,7 @@ sap.ui.define(
                                 expandable: false,
                                 width: "auto" // Adjust width as needed
                             });
-                            oPanel2.addContent(new sap.m.Label({ text: response.results[0].NotificationDetails.DeliveryTimestamp }));
+                            oPanel2.addContent(new sap.m.Label({ text: sFormattedDate }));
                             var oPanel3 = new sap.m.Panel({
                                 headerText: "Content of Message",
                                 expandable: false,
@@ -111,7 +128,7 @@ sap.ui.define(
 
                         }
                         else if (response.results.length === 0) {
-                            MessageBox.error("There are no notifications for this record.");
+                            MessageBox.error("No notification available to display.");
                         }
 
                     },
