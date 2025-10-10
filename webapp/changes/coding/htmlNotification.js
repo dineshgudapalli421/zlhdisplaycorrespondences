@@ -64,7 +64,23 @@ sap.ui.define(
 
                             // Format the date
                             var sFormattedDate = oDateFormat.format(finalDate);
-                            var oContent = response.results[0].NotificationDetails.Content;//response.results[0].Content;
+                            var oContent = '';//response.results[0].Content;
+                            if (response.results[0].DeliveryChannel === 'SMS') {
+                                var oSMSContent = response.results[0].NotificationDetails.Content;
+                                if (oSMSContent.includes("\n\n") === true) {
+                                    oSMSContent.replaceAll("\n\n", "\n \n");
+                                }
+                                var oFinalContent = '';
+                                var objSMSContent = oSMSContent.split('\n');
+                                objSMSContent.forEach(function (sfield) {
+                                    //sfield = sfield === "" ? '<p>"\n"</p>' : sfield;
+                                    oFinalContent += "<p>" + sfield + "</p>";
+                                });
+                                oContent = "<body>" + oFinalContent + "</body>";
+                            }
+                            else {
+                                oContent = response.results[0].NotificationDetails.Content;
+                            }
                             var oHtml = new sap.ui.core.HTML({
                                 content: oContent,
                                 sanitizeContent: true
